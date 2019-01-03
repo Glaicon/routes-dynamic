@@ -30,3 +30,15 @@
     transform: rotate(360deg);
   }
 }
+
+.App-Button{
+  font-size: 18px;
+}
+
+.App-Label{
+  font-size: 18px;
+}
+
+.App-Input{
+  font-size: 18px;
+}

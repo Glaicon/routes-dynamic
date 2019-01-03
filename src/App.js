@@ -1,26 +1,26 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { BrowserRouter } from 'react-router-dom';
+import { Router } from 'react-router'
+import { renderRoutes } from 'react-router-config';
 
-class App extends Component {
+const ContextType = {
+  // Redux store
+  store: PropTypes.object.isRequired,
+  routes: PropTypes.array.isRequired,
+};
+class App extends React.PureComponent {
+  static propTypes = {
+    context: PropTypes.shape(ContextType).isRequired,
+  };
+
+  static childContextTypes = ContextType;
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
+    return React.Children.only(
+      <BrowserRouter history={Router.history}>
+        {renderRoutes(this.props.context.routes[0].routes)}
+      </BrowserRouter>
     );
   }
 }
